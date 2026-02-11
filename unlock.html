@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Focus Mode</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: block;
+            /* Override flex center from body style for this page if needed, or keep it */
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .essay-container {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: #334155;
+            border-left: 4px solid var(--primary-color);
+            user-select: none;
+            /* Prevent easy copy-paste */
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: var(--font-family);
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .error-msg {
+            color: #ef4444;
+            display: none;
+            margin-top: 0.5rem;
+        }
+
+        .monitor-text {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Focus Lock 🔒</h1>
+        <p>To turn off Focus Mode, you must remind yourself why you started. Type the following text exactly as shown
+            below.</p>
+
+        <div class="monitor-text">Reference Text:</div>
+        <div class="essay-container" id="referenceText">
+            Dreams are not merely the fleeting images that visit us in our sleep, but the deep-seated aspirations that
+            define our waking purpose. They are the blueprints of our potential, sketching out the skylines of what we
+            might one day become. However, a dream without a plan is just a wish. This is where goals come into play.
+            Goals are the stepping stones that bridge the gap between where we are and where we want to be. They
+            transform the abstract nature of a dream into concrete, actionable reality. To achieve greatness, one must
+            possess the discipline to pursue these goals relentlessly, even when the path becomes difficult.
+            Distractions are the enemy of progress, distinct obstacles designed to test our resolve. By mastering our
+            focus, we honor our dreams and give them the respect they deserve. Every moment spent in concentrated effort
+            is a deposit into the bank of our future. We must refuse to settle for mediocrity and instead strive for the
+            excellence that lies within our reach. Let us commit today to staying true to our vision, for in the pursuit
+            of our goals, we do not just achieve success; we evolve into the person we were always meant to be. The
+            journey is long, but the reward is a life lived without regret.
+        </div>
+
+        <div class="monitor-text">Your Input:</div>
+        <textarea id="inputEssay" placeholder="Start typing here..."></textarea>
+
+        <div class="status-bar">
+            <span id="progressText">0% Match</span>
+            <span id="charCount">0 characters</span>
+        </div>
+        <div id="errorMsg" class="error-msg">Text does not match. Keep typing exactly as shown.</div>
+
+        <button id="unlockBtn" class="btn" style="margin-top: 1.5rem; opacity: 0.5; cursor: not-allowed;" disabled>Turn
+            Off Focus Mode</button>
+    </div>
+    <script type="module" src="js/unlock.js"></script>
+</body>
+
+</html>

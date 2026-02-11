@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Mode</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 100%);
+            color: white;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            max-width: 700px;
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: #e0e7ff;
+            font-size: 1.1rem;
+        }
+
+        .goals-display {
+            text-align: left;
+            margin: 2rem 0;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .goal-item {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .goal-item::before {
+            content: "🎯";
+            margin-right: 10px;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            margin-top: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Stay Focused</h1>
+        <p>You were trying to visit <strong id="blockedSite">a restricted site</strong>.</p>
+        <p>Remember your goals:</p>
+
+        <div class="goals-display" id="goalsDisplay">
+            <!-- Goals will be injected here -->
+        </div>
+
+        <button id="closeTab" class="btn">Get Back to Work</button>
+    </div>
+    <script type="module" src="js/focus.js"></script>
+</body>
+
+</html>
