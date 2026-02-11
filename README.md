@@ -2,6 +2,11 @@
 
 Block distracting websites and focus on your goals with this simple Chrome Extension.
 
+## Video
+
+https://github.com/user-attachments/assets/0eb51b23-b647-46ea-a789-75bf57c53eca
+
+
 ## Features
 
 - **Goal Tracking**: Set and track your daily goals to stay motivated.
@@ -18,7 +23,9 @@ This extension is currently in developer mode and can be installed via "Load unp
 2.  Open Google Chrome and navigate to `chrome://extensions/`.
 3.  Enable **Developer mode** by toggling the switch in the top-right corner.
 4.  Click the **Load unpacked** button in the top-left corner.
-5.  Select the **`website-blocker`** directory (the folder containing `manifest.json`).
+5.  Select the **`website-
+
+blocker`** directory (the folder containing `manifest.json`).
 6.  The extension should now appear in your list of installed extensions.
 
 ## Usage
