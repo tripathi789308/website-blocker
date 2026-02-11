@@ -5,9 +5,15 @@ let currentCustomSites = [];
 async function init() {
     // 1. Load Goals
     const goals = await getGoals();
-    if (goals[0]) document.getElementById('goal1').value = goals[0];
-    if (goals[1]) document.getElementById('goal2').value = goals[1];
-    if (goals[2]) document.getElementById('goal3').value = goals[2];
+    const container = document.getElementById('goalsContainer');
+    container.innerHTML = '';
+
+    if (goals.length === 0) {
+        // Add one empty goal by default if none exist
+        renderGoalInput('');
+    } else {
+        goals.forEach(goal => renderGoalInput(goal));
+    }
 
     // 2. Load Blocked Sites
     const blocked = await getBlockedSites();
@@ -32,6 +38,63 @@ async function init() {
     // Listeners for live preview update
     socialCheckbox.addEventListener('change', updateBlockedPreview);
     streamingCheckbox.addEventListener('change', updateBlockedPreview);
+
+    // Add Goal Button Listener
+    document.getElementById('addGoalBtn').addEventListener('click', () => {
+        renderGoalInput('');
+    });
+
+    // Add Custom Site Button Listener
+    document.getElementById('addCustomSiteBtn').addEventListener('click', () => {
+        addCustomSite();
+    });
+
+    // Allow Enter key to add custom site
+    document.getElementById('customBlock').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            addCustomSite();
+        }
+    });
+}
+
+function addCustomSite() {
+    const input = document.getElementById('customBlock');
+    const value = input.value.trim();
+
+    if (!value) return;
+
+    const domain = value.toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0];
+
+    if (domain && !currentCustomSites.includes(domain)) {
+        currentCustomSites.push(domain);
+        renderCustomSites();
+        updateBlockedPreview();
+        input.value = '';
+    } else if (currentCustomSites.includes(domain)) {
+        alert('Site already in the list!');
+        input.value = '';
+    }
+}
+
+function renderGoalInput(value = '') {
+    const container = document.getElementById('goalsContainer');
+    const div = document.createElement('div');
+    div.className = 'input-group';
+    div.style.display = 'flex';
+    div.style.alignItems = 'center';
+    div.style.gap = '10px';
+
+    div.innerHTML = `
+        <input type="text" class="goal-input" placeholder="Enter your goal..." value="${value}" style="flex:1;">
+        <button class="remove-goal-btn" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:1.2rem;">&times;</button>
+    `;
+
+    // Add delete listener
+    div.querySelector('.remove-goal-btn').addEventListener('click', () => {
+        container.removeChild(div);
+    });
+
+    container.appendChild(div);
 }
 
 function renderCustomSites() {
@@ -85,11 +148,10 @@ function updateBlockedPreview() {
 
 document.getElementById('saveGoals').addEventListener('click', async () => {
     // 1. Save Goals
-    const g1 = document.getElementById('goal1').value.trim();
-    const g2 = document.getElementById('goal2').value.trim();
-    const g3 = document.getElementById('goal3').value.trim();
-
-    const goals = [g1, g2, g3].filter(g => g.length > 0);
+    const goalInputs = document.querySelectorAll('.goal-input');
+    const goals = Array.from(goalInputs)
+        .map(input => input.value.trim())
+        .filter(g => g.length > 0);
 
     if (goals.length === 0) {
         alert("Please enter at least one goal to stay motivated.");

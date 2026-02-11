@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test Onboarding</title>
+</head>
+
+<body>
+    <!-- Mock Environment -->
+    <script>
+        window.chrome = {
+            storage: {
+                sync: {
+                    data: {
+                        goals: ["Mock Goal 1", "Mock Goal 2"],
+                        blockedSites: ["facebook.com"],
+                        initialized: false
+                    },
+                    get: function (keys) {
+                        return new Promise((resolve) => {
+                            const result = {};
+                            if (Array.isArray(keys)) {
+                                keys.forEach(k => result[k] = this.data[k]);
+                            } else {
+                                // object with defaults
+                                Object.keys(keys).forEach(k => {
+                                    result[k] = this.data[k] !== undefined ? this.data[k] : keys[k];
+                                });
+                            }
+                            console.log('Mock get:', keys, result);
+                            resolve(result);
+                        });
+                    },
+                    set: function (items) {
+                        return new Promise((resolve) => {
+                            Object.assign(this.data, items);
+                            console.log('Mock set:', items, this.data);
+                            // Expose for testing verification
+                            window.lastSavedData = items;
+                            resolve();
+                        });
+                    }
+                }
+            }
+        };
+        // Mock window.close
+        window.close = () => console.log('Mock window.close called');
+    </script>
+
+    <!-- HTML Structure from onboarding.html (simplified but functionally equivalent for JS) -->
+    <div class="container">
+        <h1>Focus Session Setup</h1>
+        <div class="section-title">1. Your Goals</div>
+        <div class="goals-list" id="goalsContainer">
+            <!-- Populated by JS -->
+        </div>
+        <button id="addGoalBtn" id="addGoalBtn">+ Add Goal</button>
+
+        <div class="section-title">2. Block Distractions</div>
+        <div class="blocking-options">
+            <div class="checkbox-group">
+                <input type="checkbox" id="blockSocial">
+                <label for="blockSocial">Block Social Media</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="blockStreaming">
+                <label for="blockStreaming">Block Streaming</label>
+            </div>
+            <div class="input-group">
+                <ul class="custom-sites-list" id="customSitesList"></ul>
+                <input type="text" id="customBlock" placeholder="Add custom site">
+            </div>
+            <div class="all-blocked-preview">
+                <div class="tags-container" id="allBlockedPreview"></div>
+            </div>
+        </div>
+
+        <button id="saveGoals">Update & Start Focusing</button>
+    </div>
+
+    <!-- Load the script under test -->
+    <script type="module" src="../js/onboarding.js"></script>
+</body>
+
+</html>

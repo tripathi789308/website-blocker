@@ -131,17 +131,12 @@
     <p>Review and update your focus plan.</p>
 
     <div class="section-title">1. Your Goals</div>
-    <div class="goals-list" id="goalsList">
-      <div class="input-group">
-        <input type="text" placeholder="Goal 1 (e.g., Finish my thesis)" id="goal1">
-      </div>
-      <div class="input-group">
-        <input type="text" placeholder="Goal 2 (e.g., Learn React)" id="goal2">
-      </div>
-      <div class="input-group">
-        <input type="text" placeholder="Goal 3 (optional)" id="goal3">
-      </div>
+    <div class="goals-list" id="goalsContainer">
+      <!-- Populated by JS -->
     </div>
+    <button id="addGoalBtn" class="btn"
+      style="background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; width: 100%; margin-bottom: 2rem;">+
+      Add Goal</button>
 
     <div class="section-title">2. Block Distractions</div>
     <div class="blocking-options">
@@ -165,7 +160,11 @@
         <ul class="custom-sites-list" id="customSitesList">
           <!-- Populated by JS -->
         </ul>
-        <input type="text" id="customBlock" placeholder="Add another site (e.g., news.com)">
+        <div class="input-group" style="display: flex; gap: 10px;">
+          <input type="text" id="customBlock" placeholder="Add another site (e.g., news.com)" style="flex: 1;">
+          <button id="addCustomSiteBtn" class="btn"
+            style="padding: 0 1rem; font-size: 1.2rem; line-height: 1;">+</button>
+        </div>
       </div>
 
       <div class="all-blocked-preview">
