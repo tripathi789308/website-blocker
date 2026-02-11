@@ -2,6 +2,11 @@
 
 Block distracting websites and focus on your goals with this simple Chrome Extension.
 
+## Onboarding page
+
+<img width="1512" height="982" alt="image" src="https://github.com/user-attachments/assets/bf970312-9719-43aa-ab5a-8176137ead73" />
+
+
 ## Video
 
 https://github.com/user-attachments/assets/2cdf214e-b391-4ef1-9e99-fe3f99d37aa3
